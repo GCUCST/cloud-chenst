@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<h1>成功！</h1>
+<!--th:text 将div里面的文本内容设置为${msg} 同 jsp ，后台只需把数据放入map中即可-->
+<div th:text="${msg}"></div>
+<div th:text="${session.get('username')}">这是显示欢迎信息</div>
+<h1>表单提交</h1>
+
+<form th:action="@{/add}" method="post">
+    姓名:<input type="text" name="name"><br><br>
+    性别:<input type="radio" name="sex" value="女">女
+    <input type="radio" name="sex" value="男">男<br><br>
+    年龄:<input type="text" name="age"><br><br>
+    学历:<select name="education">
+    <option value="小学">小学</option>
+    <option value="初中">初中</option>
+    <option value="高中">高中</option>
+    <option value="本科">本科</option>
+    <option value="研究生">研究生</option>
+    <option value="博士">博士</option>
+        </select><br><br>
+    个人简介:<textarea name="information" rows="10" cols="20"></textarea><br><br>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>
