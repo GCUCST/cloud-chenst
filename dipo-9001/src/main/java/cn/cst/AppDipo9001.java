@@ -10,9 +10,9 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @EnableEurekaClient
 @EnableConfigurationProperties
 @ConfigurationPropertiesScan
-public class MainApp9001 {
+public class AppDipo9001 {
     public static void main(String[] args) {
-        SpringApplication.run(MainApp9001.class, args);
+        SpringApplication.run(AppDipo9001.class, args);
     }
 }
 

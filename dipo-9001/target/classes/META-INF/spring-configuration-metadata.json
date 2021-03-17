@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "spring.thymeleaf",
+      "type": "cn.cst.config.ThymeleafConfig",
+      "sourceType": "cn.cst.config.ThymeleafConfig"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
