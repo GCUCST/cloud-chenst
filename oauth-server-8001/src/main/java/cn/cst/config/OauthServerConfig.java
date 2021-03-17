@@ -21,22 +21,45 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
+
+// 三大配置
+// 1.根据oauth，客户端访问授权服务器需要有一个身份，即 客户端详情
+// 2.令牌访问端点，即 token访问的地址和类型
+// 3.令牌端点访问的安全约束
 @EnableAuthorizationServer
 @Configuration
 public class OauthServerConfig extends AuthorizationServerConfigurerAdapter {
 
-  @Autowired private TokenStore tokenStore;
-  @Autowired private ClientDetailsService clientDetailsService;
-  @Autowired public AuthenticationManager authenticationManager;
-  @Autowired private JwtAccessTokenConverter accessTokenConverter;
-  @Autowired private AuthorizationCodeServices authorizationCodeServices;
+
+  @Autowired TokenStore tokenStore;
+  @Autowired ClientDetailsService clientDetailsService;
+  @Autowired AuthenticationManager authenticationManager;
+  @Autowired JwtAccessTokenConverter accessTokenConverter;
+  @Autowired AuthorizationCodeServices authorizationCodeServices;
+
 
   @Bean
   public AuthorizationCodeServices authorizationCodeServices() {
     return new InMemoryAuthorizationCodeServices();
   }
 
-  // 指定客户端信息的数据库来源
+  @Bean
+  public AuthorizationServerTokenServices tokenServices() {
+    DefaultTokenServices services = new DefaultTokenServices();
+    services.setClientDetailsService(clientDetailsService); //客户端信息服务
+    services.setSupportRefreshToken(true); //产生刷新令牌
+    services.setTokenStore(tokenStore); //令牌存储方案
+    TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+    tokenEnhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter));
+    services.setTokenEnhancer(tokenEnhancerChain);
+    services.setAccessTokenValiditySeconds(7200);//令牌默认有效期
+    services.setRefreshTokenValiditySeconds(259200);//刷新令牌有效期
+    return services;
+  }
+
+
+
+
   @Override
   public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
     clients
@@ -47,22 +70,8 @@ public class OauthServerConfig extends AuthorizationServerConfigurerAdapter {
         .authorizedGrantTypes(
             "authorization_code", "password", "client_credentials", "implicit", "refresh_token")
         .scopes("all")
-        .autoApprove(false)
+        .autoApprove(false) // 会跳转到授权页面
         .redirectUris("http://www.baidu.com");
-  }
-
-  @Bean
-  public AuthorizationServerTokenServices tokenServices() {
-    DefaultTokenServices services = new DefaultTokenServices();
-    services.setClientDetailsService(clientDetailsService);
-    services.setSupportRefreshToken(true);
-    services.setTokenStore(tokenStore);
-    TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-    tokenEnhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter));
-    services.setTokenEnhancer(tokenEnhancerChain);
-    services.setAccessTokenValiditySeconds(7200);
-    services.setRefreshTokenValiditySeconds(259200);
-    return services;
   }
 
   @Override
@@ -74,7 +83,6 @@ public class OauthServerConfig extends AuthorizationServerConfigurerAdapter {
         .allowedTokenEndpointRequestMethods(HttpMethod.POST);
   }
 
-  // 检查token的策略
   @Override
   public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
     security
@@ -82,4 +90,8 @@ public class OauthServerConfig extends AuthorizationServerConfigurerAdapter {
         .checkTokenAccess("permitAll()")
         .allowFormAuthenticationForClients();
   }
+
+
+
+
 }

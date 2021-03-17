@@ -13,6 +13,7 @@
         <module>oauth-server-8001</module>
         <module>provider-8002</module>
         <module>dipo-9001</module>
+        <module>oauth-resource</module>
     </modules>
     <packaging>pom</packaging>
 
