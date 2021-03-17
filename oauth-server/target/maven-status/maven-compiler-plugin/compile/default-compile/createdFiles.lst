@@ -1,0 +1,8 @@
+cn\cst\config\OauthServerConfig.class
+cn\cst\config\WebSecurityConfig.class
+cn\cst\domain\SysUser$SysUserBuilder.class
+cn\cst\domain\SysRole.class
+cn\cst\config\TokenConfig.class
+cn\cst\OauthServerApplication.class
+cn\cst\service\SpringDataUserDetailsService.class
+cn\cst\domain\SysUser.class

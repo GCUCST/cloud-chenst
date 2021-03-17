@@ -1,0 +1,21 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: aouth-server
+  security:
+    user:
+      name: root
+      password: root
+
+
+eureka:
+  instance:
+    instance-id: aouth-server-id
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka

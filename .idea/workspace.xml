@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ccfd64a2-df47-40e2-ac8d-c349cbdbb273" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+    <option name="PARALLEL_COMPILATION" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
+  </component>
+  <component name="ProjectId" id="1pqJsuTOSZiImqOYwRhyDmWJR8h" />
+  <component name="ProjectViewState">
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="jdk.selected.JAVA_MODULE" value="11" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/oauth-server/src/main/java" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\backend-projects\cloud-chenst\oauth-server\src\main\java" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.App8002">
+    <configuration name="App8002" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="provider-8002" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cm.cst.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cm.cst.App8002" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainApp7001" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="register-center" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.cst.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.cst.MainApp7001" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OauthServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="oauth-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.cst.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.cst.OauthServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.App8002" />
+        <item itemvalue="Spring Boot.OauthServerApplication" />
+        <item itemvalue="Spring Boot.MainApp7001" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ccfd64a2-df47-40e2-ac8d-c349cbdbb273" name="Default Changelist" comment="" />
+      <created>1615904896422</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615904896422</updated>
+      <workItem from="1615904899805" duration="6846000" />
+      <workItem from="1615913975904" duration="5650000" />
+      <workItem from="1615950145089" duration="4969000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="832" y="301" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1615919033843">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="832" y="301" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/-1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1615919033843" />
+    <state x="1058" y="409" key="#com.intellij.ws.actions.HttpClientConvertFromCurlDialog" timestamp="1615912812799">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="1058" y="409" key="#com.intellij.ws.actions.HttpClientConvertFromCurlDialog/-1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1615912812799" />
+    <state width="1356" height="327" key="GridCell.Tab.0.bottom" timestamp="1615991341587">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1356" height="327" key="GridCell.Tab.0.bottom/-1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1615991341587" />
+    <state width="1356" height="327" key="GridCell.Tab.0.center" timestamp="1615991341586">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1356" height="327" key="GridCell.Tab.0.center/-1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1615991341586" />
+    <state width="1356" height="327" key="GridCell.Tab.0.left" timestamp="1615991341586">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1356" height="327" key="GridCell.Tab.0.left/-1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1615991341586" />
+    <state width="1356" height="327" key="GridCell.Tab.0.right" timestamp="1615991341587">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1356" height="327" key="GridCell.Tab.0.right/-1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1615991341587" />
+    <state width="1356" height="327" key="GridCell.Tab.1.bottom" timestamp="1615991341587">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1356" height="327" key="GridCell.Tab.1.bottom/-1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1615991341587" />
+    <state width="1356" height="327" key="GridCell.Tab.1.center" timestamp="1615991341587">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1356" height="327" key="GridCell.Tab.1.center/-1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1615991341587" />
+    <state width="1356" height="327" key="GridCell.Tab.1.left" timestamp="1615991341587">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1356" height="327" key="GridCell.Tab.1.left/-1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1615991341587" />
+    <state width="1356" height="327" key="GridCell.Tab.1.right" timestamp="1615991341587">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1356" height="327" key="GridCell.Tab.1.right/-1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1615991341587" />
+    <state x="726" y="336" key="Registry" timestamp="1615912209077">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="726" y="336" key="Registry/-1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1615912209077" />
+    <state x="588" y="165" key="SettingsEditor" timestamp="1615919048812">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="588" y="165" key="SettingsEditor/-1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1615919048812" />
+    <state x="434" y="290" key="new project wizard" timestamp="1615991267512">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="434" y="290" key="new project wizard/-1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1615991267512" />
+  </component>
+</project>
