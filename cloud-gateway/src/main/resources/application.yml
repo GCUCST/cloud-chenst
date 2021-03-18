@@ -1,18 +1,20 @@
 server:
-  port: 9001
+  port: 8000
 
 spring:
   application:
-    name: dipo
-  thymeleaf:
-    prefix: classpath:/templates/
+    name: gateway
+
 
 eureka:
   instance:
-    instance-id: dipo-id
+    instance-id: aouth-gateway-id
     prefer-ip-address: true
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:7001/eureka
+zuul:
+  routes: aouth-server
+  strip-prefix: false

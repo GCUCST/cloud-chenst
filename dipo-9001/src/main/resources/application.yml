@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: dipo
+  thymeleaf:
+    prefix: classpath:/templates/
 
 eureka:
   instance:

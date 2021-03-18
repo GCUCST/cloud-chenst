@@ -16,17 +16,13 @@ import java.util.Map;
 public class PageController {
 
     @GetMapping("/")
-    public String index(Model model, HttpSession session) {
-        session.setAttribute("username","陈少荣");
-        Map<String,String> map = new  HashMap<String,String>();
-        map.put("msg","你好...");
-        model.addAllAttributes(map);
+    public String index() {
         return "index";
     }
 
-    @PostMapping("/add")
-    public String add(@ModelAttribute User user) {
+    @GetMapping("/page/login")
+    public String add(@ModelAttribute User user,Model model) {
         System.out.println(user.getName());
-        return "index";
+        return "login";
     }
 }

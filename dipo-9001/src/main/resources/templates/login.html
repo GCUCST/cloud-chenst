@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<h1>成功！</h1>
+<!--th:text 将div里面的文本内容设置为${msg} 同 jsp ，后台只需把数据放入map中即可-->
+<div th:text="${session.get('username')!=null?session.get('username'):'请登录'}"></div>
+<h1>表单提交</h1>
+
+<form th:action="@{/api/login}" method="post">
+    姓名:<input type="text" name="name"><br><br>
+    密码:<input type="text" name="password"><br><br>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>
