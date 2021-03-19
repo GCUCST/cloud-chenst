@@ -7,14 +7,14 @@
     <script>
         function fun1() {
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: "http://localhost:9001/api/rest",
-                dataType: "text/json",
+                dataType: "text",
                 success: function (data) {
                     console.log(data)
                 },
                 error: function (jqXHR) {
-                    alert("发生错误：" + jqXHR.status);
+                   console.log(jqXHR)
                 }
             });
         }

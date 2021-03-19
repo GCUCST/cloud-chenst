@@ -20,7 +20,7 @@ public class ApiController {
         return "index";
     }
 
-    @PostMapping("/api/rest")
+    @GetMapping("/api/rest")
     @ResponseBody
     public String rest() {
 
