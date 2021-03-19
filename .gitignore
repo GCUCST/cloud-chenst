@@ -11,6 +11,7 @@
 # Eclipse Forlders
 Servers/
 target/
+classes/
 .metadata/
 .recommenders/
 .settings/
