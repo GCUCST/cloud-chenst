@@ -25,7 +25,7 @@
 <!--th:text 将div里面的文本内容设置为${msg} 同 jsp ，后台只需把数据放入map中即可-->
 <div th:text="${session.get('username')!=null?session.get('username'):'请登录'}"></div>
 <button th:if="${session.get('username')!=null}" onclick="fun1()">退出</button>
-<a href="/page/login">跳转</a>
+<a href="/page/login">跳转1</a>
 
 </body>
 </html>

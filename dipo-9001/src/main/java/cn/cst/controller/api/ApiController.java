@@ -1,18 +1,16 @@
-package cn.cst.controller;
+package cn.cst.controller.api;
 
 import cn.cst.entity.User;
 import org.apache.catalina.Session;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
 
-@Controller
+@RestController
 public class ApiController {
+
 
     @PostMapping("/api/login")
     public String add(@ModelAttribute User user, HttpSession session) {
@@ -21,9 +19,7 @@ public class ApiController {
     }
 
     @GetMapping("/api/rest")
-    @ResponseBody
     public String rest() {
-
         return "index";
     }
 
