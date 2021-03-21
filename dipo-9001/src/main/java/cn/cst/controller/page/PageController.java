@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -13,8 +14,9 @@ import javax.servlet.http.HttpSession;
 public class PageController extends AbstractController {
 
     @GetMapping("/")
-    public String defaultPage(HttpSession session) {
+    public String defaultPage(HttpSession session, HttpServletRequest request) {
         session.setAttribute("username","陈少桐");
+        session.setAttribute("ip",request.getRemoteAddr());
         return INDEX_PAGE;
     }
 
