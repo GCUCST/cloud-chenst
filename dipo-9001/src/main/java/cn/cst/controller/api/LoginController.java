@@ -28,5 +28,11 @@ public class LoginController {
         return ResponseEntity.ok(loginUser);
 
     }
+    @PostMapping("/logout")
+    public ResponseEntity<Boolean> loginUser(HttpSession session){
+        session.removeAttribute("username");
+        return ResponseEntity.ok(true);
+
+    }
 
 }
