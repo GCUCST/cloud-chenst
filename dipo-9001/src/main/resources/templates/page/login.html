@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link th:href="@{/css/layui.css}" rel="stylesheet"/>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script th:src="@{layui.js}" charset="utf-8"></script>
+</head>
+<body>
+<div th:replace="~{component/header.html}"></div>
+
+<div class="layui-container" style="width: 50%;margin-top: 100px">
+    <div class="layui-row">
+        <div class="layui-col-md9">
+            <form class="layui-form" method="POST">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <i class="layui-icon layui-icon-username"></i>
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" required lay-verify="required" placeholder="请输入邮箱/账号"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <i class="layui-icon layui-icon-key"></i>
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="formDemo">登录</button>
+                        <div style="color: #01AAED;cursor: pointer;text-align: right">没有账号？去注册</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    layui.use('form', function () {
+        let form = layui.form;
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            $.ajax({
+                type: 'POST',
+                dataType:'json',
+                url: "http://localhost:9001/api/login",
+                headers: { "Content-Type": "application/json" },
+                data: JSON.stringify({
+                    username: data.field.username,
+                    password: data.field.password
+                }),
+                success: (res) => {
+                    console.log(res)
+                    window.location.replace("http://localhost:9001/index");
+                }, error: (e) => {
+                    console.log(e)
+                    alert("登录失败！"+e.responseJSON.msg);
+                },
+            });
+
+            return false;
+        });
+    });
+</script>
+
+
+</body>
+</html>

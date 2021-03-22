@@ -15,8 +15,7 @@ public class PageController extends AbstractController {
 
     @GetMapping("/")
     public String defaultPage(HttpSession session, HttpServletRequest request) {
-        session.setAttribute("username","陈少桐");
-        session.setAttribute("ip",request.getRemoteAddr());
+
         return INDEX_PAGE;
     }
 

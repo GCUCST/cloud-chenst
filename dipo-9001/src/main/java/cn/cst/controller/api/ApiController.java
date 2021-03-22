@@ -12,11 +12,11 @@ import javax.servlet.http.HttpSession;
 public class ApiController {
 
 
-    @PostMapping("/api/login")
-    public String add(@ModelAttribute User user, HttpSession session) {
-        session.setAttribute("username", user.getName());
-        return "index";
-    }
+//    @PostMapping("/api/login")
+//    public String add(@ModelAttribute User user, HttpSession session) {
+//        session.setAttribute("username", user.getName());
+//        return "index";
+//    }
 
     @GetMapping("/api/rest")
     public String rest() {
