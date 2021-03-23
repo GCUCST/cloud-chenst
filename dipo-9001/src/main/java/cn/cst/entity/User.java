@@ -8,7 +8,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Builder
 @NoArgsConstructor
@@ -30,18 +31,17 @@ public class User {
     @Column(name = "password",nullable = true)
     private String password;
 
-    @Column(name = "user_info_id",nullable = true)
-    private String userInfoId;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_info_id",insertable=false, updatable=false)
-    private UserInfo userInfo;
-
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private List<Address> address;
+    @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="USER_ID")
+    private Set<Address> addresses = new HashSet<>();
 
 
 
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
 }

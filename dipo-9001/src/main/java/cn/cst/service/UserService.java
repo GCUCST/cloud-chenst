@@ -1,9 +1,9 @@
 package cn.cst.service;
 
-import cn.cst.dao.UserInfoRepository;
+//import cn.cst.dao.UserInfoRepository;
 import cn.cst.dao.UserRepository;
 import cn.cst.entity.User;
-import cn.cst.entity.UserInfo;
+//import cn.cst.entity.UserInfo;
 import cn.cst.exception.LoginException;
 import cn.cst.exception.UserExistException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private UserInfoRepository userInfoRepository;
+//    @Autowired
+//    private UserInfoRepository userInfoRepository;
 
 
     public User loginUser(User user) {
@@ -64,12 +64,10 @@ public class UserService {
         if (database_user != null) {
             throw new UserExistException("400", "用户已经存在");
         }
-
-        UserInfo userInfo = userInfoRepository.save(UserInfo.builder().status("OK").build());
-        user.setUserInfoId(userInfo.getId());
         user.setPassword(encoderByMd5(user.getPassword()));
         User userSave = userRepository.save(user);
-
+//        UserInfo ok = UserInfo.builder().userId(userSave.getId()).status("OK").build();
+//        userInfoRepository.save(ok);
         return userSave;
     }
 

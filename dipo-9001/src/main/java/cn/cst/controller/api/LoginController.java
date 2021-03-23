@@ -24,14 +24,14 @@ public class LoginController {
     public ResponseEntity<User> loginUser(@RequestBody @Valid User user, HttpSession session){
         log.info(user.getUsername());
         User loginUser = userService.loginUser(user);
-        session.setAttribute("user",loginUser);
-        session.setAttribute("username",loginUser.getUsername());
-        System.out.println(loginUser.getUserInfo().getStatus());
+//        session.setAttribute("user",loginUser);
+//        session.setAttribute("username",loginUser.getUsername());
+//        System.out.println(loginUser.getUserInfo().getStatus());
         return ResponseEntity.ok(loginUser);
 
     }
     @PostMapping("/logout")
-    public ResponseEntity<Boolean> loginUser(HttpSession session){
+    public ResponseEntity<Boolean> logout(HttpSession session){
         session.removeAttribute("username");
         return ResponseEntity.ok(true);
     }
