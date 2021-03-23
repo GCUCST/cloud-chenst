@@ -19,9 +19,15 @@ public class PageController extends AbstractController {
         return INDEX_PAGE;
     }
 
+    @GetMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("msg","注册页面");
+        return REGISTER_PAGE;
+    }
+
     @GetMapping("/index")
     public String index(Model model) {
-        model.addAttribute("msg","我的消息..");
+        model.addAttribute("msg","登录页面");
         return INDEX_PAGE;
     }
 
@@ -29,4 +35,15 @@ public class PageController extends AbstractController {
     public String add() {
         return LOGIN_PAGE;
     }
+
+    @GetMapping("/user/info")
+    public String userInfo(Model model) {
+        model.addAttribute("msg","用户资料");
+        return USER_INFO_PAGE;
+    }
+
+
+
+
+
 }

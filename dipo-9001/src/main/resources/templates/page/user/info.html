@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link th:href="@{/css/layui.css}" rel="stylesheet"/>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script th:src="@{layui.js}" charset="utf-8"></script>
+</head>
+<body>
+<div th:replace="~{component/header.html}"></div>
+
+<div class="layui-container" style="width: 50%;margin-top: 100px">
+    <div class="layui-row">
+        <div class="layui-col-md9">
+            <form class="layui-form" method="POST">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <i class="layui-icon layui-icon-username"></i>
+                    </label>
+                    <div class="layui-input-block">
+                        <!--/*@thymesVar id="username" type="cn.cst.entity.User"*/-->
+                        <input type="text" name="username" required lay-verify="required"
+                               autocomplete="off" class="layui-input" th:value="${session.get('user').username}"
+                            disabled
+                        >
+                    </div>
+
+
+
+
+
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="formDemo">保存</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    layui.use('form', function () {
+        let form = layui.form;
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            if (data.field.password != data.field.passwordConfirm) {
+                alert("密码不一致！");
+                return false;
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: "http://localhost:9001/api/user",
+                    headers: {"Content-Type": "application/json"},
+                    data: JSON.stringify({
+                        username: data.field.username,
+                        password: data.field.password
+                    }),
+                    success: (res) => {
+                        console.log(res)
+                        alert("注册成功");
+                        window.location.replace("http://localhost:9001/login");
+                    }, error: (e) => {
+                        console.log(e)
+                        alert("注册失败！" + e.responseJSON.msg);
+                    },
+                });
+            }
+
+
+            return false;
+        });
+    });
+</script>
+
+
+</body>
+</html>

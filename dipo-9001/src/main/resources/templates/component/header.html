@@ -29,11 +29,11 @@
                     <span th:text="${session.get('username')}"></span>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="/user/info">基本资料</a></dd>
                     <dd><a href="">安全设置</a></dd>
+                    <dd><a href="javaScript:void(0);" onclick="logout()" >退出登录</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="javaScript:void(0);" onclick="logout()" >退了</a></li>
         </ul>
 
         <ul th:if="${session.get('username')==null}" class="layui-nav layui-layout-right">

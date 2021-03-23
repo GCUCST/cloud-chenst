@@ -1,6 +1,5 @@
 package cn.cst.entity;
 
-import com.google.inject.internal.asm.$Type;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -24,9 +24,24 @@ public class User {
     @Column(name="id")
     private String id;
     @NotEmpty
-    @Column(name = "username")
+    @Column(name = "username",nullable = true,unique = true)
     private String username;
-    @Column(name = "password")
+    @NotEmpty
+    @Column(name = "password",nullable = true)
     private String password;
+
+    @Column(name = "user_info_id",nullable = true)
+    private String userInfoId;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_info_id",insertable=false, updatable=false)
+    private UserInfo userInfo;
+
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private List<Address> address;
+
+
 
 }

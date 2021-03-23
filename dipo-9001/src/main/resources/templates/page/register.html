@@ -25,20 +25,29 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">
-                        <i class="layui-icon layui-icon-key"></i>
+                        <i class="layui-icon layui-icon-password"></i>
                     </label>
                     <div class="layui-input-block">
                         <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
                                autocomplete="off" class="layui-input">
                     </div>
                 </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <i class="layui-icon layui-icon-key"></i>
+                    </label>
+
+                    <div class="layui-input-block">
+                        <input type="password" name="passwordConfirm" required lay-verify="required" placeholder="请再次密码"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
 
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="formDemo">登录</button>
+                        <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="formDemo">注册</button>
                         <div style="color: #01AAED;cursor: pointer;text-align: right">
-                            <a href="/register">没有账号？去注册</a>
-                        </div>
+                            <a href="/login">已有账号？去登录</a></div>
                     </div>
                 </div>
             </form>
@@ -52,23 +61,31 @@
         let form = layui.form;
         //监听提交
         form.on('submit(formDemo)', function (data) {
-            $.ajax({
-                type: 'POST',
-                dataType:'json',
-                url: "http://localhost:9001/api/login",
-                headers: { "Content-Type": "application/json" },
-                data: JSON.stringify({
-                    username: data.field.username,
-                    password: data.field.password
-                }),
-                success: (res) => {
-                    console.log(res)
-                    window.location.replace("http://localhost:9001/index");
-                }, error: (e) => {
-                    console.log(e)
-                    alert("登录失败！"+e.responseJSON.msg);
-                },
-            });
+            if(data.field.password!=data.field.passwordConfirm){
+                alert("密码不一致！");
+                return false;
+            }
+            else{
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: "http://localhost:9001/api/user",
+                    headers: {"Content-Type": "application/json"},
+                    data: JSON.stringify({
+                        username: data.field.username,
+                        password: data.field.password
+                    }),
+                    success: (res) => {
+                        console.log(res)
+                        alert("注册成功");
+                        window.location.replace("http://localhost:9001/login");
+                    }, error: (e) => {
+                        console.log(e)
+                        alert("注册失败！" + e.responseJSON.msg);
+                    },
+                });
+            }
+
 
             return false;
         });

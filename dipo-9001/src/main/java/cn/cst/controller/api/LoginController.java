@@ -24,7 +24,9 @@ public class LoginController {
     public ResponseEntity<User> loginUser(@RequestBody @Valid User user, HttpSession session){
         log.info(user.getUsername());
         User loginUser = userService.loginUser(user);
+        session.setAttribute("user",loginUser);
         session.setAttribute("username",loginUser.getUsername());
+        System.out.println(loginUser.getUserInfo().getStatus());
         return ResponseEntity.ok(loginUser);
 
     }
@@ -32,7 +34,6 @@ public class LoginController {
     public ResponseEntity<Boolean> loginUser(HttpSession session){
         session.removeAttribute("username");
         return ResponseEntity.ok(true);
-
     }
 
 }
