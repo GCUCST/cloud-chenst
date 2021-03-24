@@ -1,5 +1,6 @@
 package cn.cst.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -70,6 +71,7 @@ public class User{
     @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     //维护关系的一方生成一个自定义的键（外键），值对应被维护关系的一方的主键，双向一对一需要指明unique=true
     @JoinColumn(name = "fk_user_info_id",unique=true)
+    @JsonIgnore
     public UserInfo getUserInfo() {
         return userInfo;
     }

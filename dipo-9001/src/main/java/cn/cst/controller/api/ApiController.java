@@ -18,6 +18,7 @@ public class ApiController {
 //        return "index";
 //    }
 
+
     @GetMapping("/api/rest")
     public String rest() {
         return "index";
