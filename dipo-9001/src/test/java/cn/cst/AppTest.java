@@ -3,21 +3,21 @@ package cn.cst;
 import cn.cst.controller.api.LoginController;
 import cn.cst.controller.api.UserController;
 import cn.cst.dao.AddressRepository;
+import cn.cst.dao.DepartmentRepository;
+import cn.cst.dao.EmpolyeeRepository;
 import cn.cst.dao.UserRepository;
 import cn.cst.entity.Address;
+import cn.cst.entity.Department;
+import cn.cst.entity.Empolyee;
 import cn.cst.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RunWith(SpringRunner.class)
 //启动Spring
@@ -124,5 +124,53 @@ public class AppTest {
             System.out.println(u.getUser());
         }
     }
+
+    @Autowired
+    DepartmentRepository departmentRepository;
+
+    @Autowired
+    EmpolyeeRepository empolyeeRepository;
+
+//    @Test
+//    public void testMTO() {
+//        Empolyee empolyee = new Empolyee();
+//        empolyee.setName("老王");
+//        empolyee.setJob("测试");
+//
+//        Department department = new Department();
+//        department.setName("产品二部");
+//
+//        empolyee.setDepartment(department);
+//
+////        departmentRepository.save(department);
+//        empolyeeRepository.save(empolyee);
+//
+//
+//    }
+
+    @Test
+    public void testOTM() {
+        Empolyee empolyee = new Empolyee();
+        empolyee.setName("老王1");
+        empolyee.setJob("测试");
+        Empolyee empolyee2 = new Empolyee();
+        empolyee2.setName("老陈1");
+        empolyee2.setJob("开发");
+
+        Department department = new Department();
+        department.setName("产品五部");
+
+        department.getEmpolyees().add(empolyee);
+        department.getEmpolyees().add(empolyee2);
+
+        departmentRepository.save(department);
+//        empolyeeRepository.save(empolyee);
+
+
+    }
+
+
+
+
 
 }
