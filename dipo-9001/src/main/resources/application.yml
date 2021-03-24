@@ -23,8 +23,8 @@ eureka:
     instance-id: dipo-id
     prefer-ip-address: true
   client:
-    register-with-eureka: true
-    fetch-registry: true
+    register-with-eureka: false
+    fetch-registry: false
     service-url:
       defaultZone: http://localhost:7001/eureka
 
