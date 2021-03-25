@@ -26,7 +26,6 @@ public class LoginController {
         User loginUser = userService.loginUser(user);
         session.setAttribute("user",loginUser);
         session.setAttribute("username",loginUser.getUsername());
-        System.out.println(loginUser.getId());
         return ResponseEntity.ok(loginUser);
 
     }

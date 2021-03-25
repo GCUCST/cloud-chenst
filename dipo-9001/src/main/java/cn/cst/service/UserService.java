@@ -7,6 +7,7 @@ import cn.cst.entity.User;
 import cn.cst.entity.UserInfo;
 import cn.cst.exception.LoginException;
 import cn.cst.exception.UserExistException;
+import cn.cst.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -75,5 +76,21 @@ public class UserService {
 
     public void deleteById(String id) {
         userRepository.deleteById(id);
+    }
+
+    public User updateUserInfo(String username, String wechat, String personalWebSite, String introduction) {
+
+        User userFromDB = userRepository.findByUsername(username);
+        if(userFromDB==null){
+            throw new UserNotFoundException("找不到目标用户。"+username,"404");
+        }
+        UserInfo userInfo = userFromDB.getUserInfo();
+        userInfo.setWechat(wechat);
+        userInfo.setIntroduction(introduction);
+        userInfo.setPersonalWebSite(personalWebSite);
+        userFromDB.setUserInfo(userInfo);
+        User save = userRepository.save(userFromDB);
+        return save;
+
     }
 }

@@ -37,6 +37,28 @@ public class UserInfo implements Serializable {
     Integer age;
 
     User user;
+
+
+    String personalWebSite;
+
+    String introduction;
+
+    public String getPersonalWebSite() {
+        return personalWebSite;
+    }
+
+    public void setPersonalWebSite(String personalWebSite) {
+        this.personalWebSite = personalWebSite;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
     @Id
     @GeneratedValue(generator = "jpa-uuid")
     @Column(name="id")

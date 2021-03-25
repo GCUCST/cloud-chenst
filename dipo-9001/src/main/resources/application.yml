@@ -8,13 +8,13 @@ spring:
     prefix: classpath:/templates/
   datasource:
     url: jdbc:mysql://106.55.23.102:3306/chenst?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
-#    type: com.alibaba.druid.pool.DruidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
     username: root
     password: Qq1131460769@
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL5Dialect
 

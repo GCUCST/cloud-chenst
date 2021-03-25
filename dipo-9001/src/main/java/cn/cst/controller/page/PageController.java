@@ -37,10 +37,17 @@ public class PageController extends AbstractController {
     }
 
     @GetMapping("/user/info")
-    public String userInfo(Model model) {
+    public String userInfo(Model model,HttpSession session) {
+        if(session.getAttribute("user")==null){
+            model.addAttribute("msg","需要登录");
+            return INDEX_PAGE;
+        }
         model.addAttribute("msg","用户资料");
         return USER_INFO_PAGE;
     }
+
+
+
 
 
 

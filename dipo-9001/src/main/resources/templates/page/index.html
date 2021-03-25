@@ -5,13 +5,129 @@
     <title>首页</title>
     <link th:href="@{/css/layui.css}" rel="stylesheet"/>
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
-    <script th:src="@{layui.all.js}" charset="utf-8"></script>
+    <script th:src="@{/layui.js}"></script>
 </head>
-<body>
-<div th:replace="~{component/header.html}"></div>
-<div class=" layui-bg-blue">
+<body >
+<div th:include="/component/header :: header">
+</div>
+
+
+
+<div class="layui-carousel" id="img">
+    <div carousel-item>
+        <div>
+            <img th:src="@{/image/banner.jpg}" style="width:100%;height :100%"/>
+        </div>
+        <div>
+            <img th:src="@{/image/banner2.jpg}" style="width:100%;height :100%"/>
+        </div>
+        <div>
+            <img th:src="@{/image/banner3.jpg}" style="width:100%;height :100%"/>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+<div style="width: 90%;padding: 0 5%">
+    <div class="layui-row layui-col-space10"  >
+        <div class="layui-col-md4 ">
+            <fieldset class="layui-elem-field">
+                <legend style="font-weight: bold">我说嘿</legend>
+                <div class="layui-field-box" style="text-indent: 2em">
+                    从前从前有一个程序员长得像自行车，后来他在停车场被人骑走了.
+                </div>
+            </fieldset>
+        </div>
+        <div class="layui-col-md4">
+            <fieldset class="layui-elem-field">
+                <legend  style="font-weight: bold">你说嘿嘿</legend>
+                <div class="layui-field-box" style="text-indent: 2em">
+                    程序员重来都不缺对象的，如果有需要，他只需要new一个就好了.
+                </div>
+            </fieldset>
+        </div>
+        <div class="layui-col-md4">
+            <fieldset class="layui-elem-field">
+                <legend  style="font-weight: bold">lol</legend>
+                <div class="layui-field-box" style="text-indent: 2em">
+                    这里不知道写什么好耶，只能水水文字混混日子咯.
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
 
 </div>
+
+
+<div>
+    <div id="myImage" style="left:50px;top:30px; position:absolute;">
+        <img src="image/fly.jpg" width="30" height="30"/>
+    </div>
+    <div id="dcc"></div>
+    <div id="dcd"></div>
+    <div id="dce"></div>
+    <script type="text/javascript">
+        document.onkeydown = function (event) {
+            let myImage = document.getElementById("myImage");
+            switch (event.keyCode) {
+                case 39:
+                    myImage.style.left = parseInt(myImage.style.left) + 5 + "px";
+                    break;
+                case 37:
+                    myImage.style.left = parseInt(myImage.style.left) - 5 + "px";
+                    break;
+                case 38:
+                    myImage.style.top = parseInt(myImage.style.top) - 5 + "px";
+                    break;
+                case 40:
+                    myImage.style.top = parseInt(myImage.style.top) + 5 + "px";
+                    break;
+            }
+        }
+        flag = 1
+        window.document.onclick = function (event) {
+            if (flag == 1) {
+                flag = 0
+                document.getElementById("dcd").innerHTML = ""
+            } else {
+                flag = 1
+                document.getElementById("dcd").innerHTML = ""
+            }
+
+        }
+        window.document.onmousemove = function (event) {
+            // document.getElementById("dcc").innerHTML = event.clientX;
+            // document.getElementById("dcd").innerHTML = event.clientY;
+            if (flag == 0) {
+                myImage.style.left = event.clientX + "px";
+                myImage.style.top = event.clientY + "px";
+            }
+
+        }
+    </script>
+</div>
+
+
+
+
+<script>
+    layui.use('carousel', function () {
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#img'
+            , width: '100%' //设置容器宽度
+            , arrow: 'always' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+        });
+    });
+    layui.use('element', function () {
+    });
+</script>
+
 
 </body>
 </html>
