@@ -7,10 +7,9 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
     <script th:src="@{/layui.js}"></script>
 </head>
-<body >
+<body>
 <div th:include="/component/header :: header">
 </div>
-
 
 
 <div class="layui-carousel" id="img">
@@ -31,7 +30,7 @@
 <br>
 
 <div style="width: 90%;padding: 0 5%">
-    <div class="layui-row layui-col-space10"  >
+    <div class="layui-row layui-col-space10">
         <div class="layui-col-md4 ">
             <fieldset class="layui-elem-field">
                 <legend style="font-weight: bold">我说嘿</legend>
@@ -42,7 +41,7 @@
         </div>
         <div class="layui-col-md4">
             <fieldset class="layui-elem-field">
-                <legend  style="font-weight: bold">你说嘿嘿</legend>
+                <legend style="font-weight: bold">你说嘿嘿</legend>
                 <div class="layui-field-box" style="text-indent: 2em">
                     程序员重来都不缺对象的，如果有需要，他只需要new一个就好了.
                 </div>
@@ -50,7 +49,7 @@
         </div>
         <div class="layui-col-md4">
             <fieldset class="layui-elem-field">
-                <legend  style="font-weight: bold">lol</legend>
+                <legend style="font-weight: bold">lol</legend>
                 <div class="layui-field-box" style="text-indent: 2em">
                     这里不知道写什么好耶，只能水水文字混混日子咯.
                 </div>
@@ -64,12 +63,17 @@
 
 <div>
     <div id="myImage" style="left:50px;top:30px; position:absolute;">
-        <img src="image/fly.jpg" width="30" height="30"/>
+        <img src="image/drop.gif" style="height:300px;width:300px;" onclick="func()"/>
     </div>
     <div id="dcc"></div>
     <div id="dcd"></div>
     <div id="dce"></div>
     <script type="text/javascript">
+
+    function func(){
+        console.log("")
+    }
+
         document.onkeydown = function (event) {
             let myImage = document.getElementById("myImage");
             switch (event.keyCode) {
@@ -107,10 +111,9 @@
             }
 
         }
+
     </script>
 </div>
-
-
 
 
 <script>
@@ -126,6 +129,7 @@
     });
     layui.use('element', function () {
     });
+
 </script>
 
 
