@@ -1,11 +1,7 @@
 package cn.cst.controller.api;
 
-import cn.cst.entity.User;
-import org.apache.catalina.Session;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
@@ -17,11 +13,10 @@ public class ApiController {
 //        session.setAttribute("username", user.getName());
 //        return "index";
 //    }
-
-
-    @GetMapping("/api/rest")
-    public String rest() {
-        return "index";
-    }
+//
+//    @GetMapping("error")
+//    public String rest() {
+//        return "index";
+//    }
 
 }

@@ -77,11 +77,17 @@
                     }),
                     success: (res) => {
                         console.log(res)
-                        alert("注册成功");
+                        layer.open({
+                            title: '注册成功'
+                            ,content: "跳转回首页"
+                        });
                         window.location.replace("/login");
                     }, error: (e) => {
                         console.log(e)
-                        alert("注册失败！" + e.responseJSON.msg);
+                        layer.open({
+                            title: '注册失败'
+                            ,content: e.responseJSON.msg
+                        });
                     },
                 });
             }

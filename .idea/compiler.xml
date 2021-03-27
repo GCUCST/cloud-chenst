@@ -8,9 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="register-center" />
-        <module name="oauth-server" />
+        <module name="oauth-security" />
+        <module name="oauth-server-8001" />
         <module name="api-common" />
         <module name="provider-8002" />
+        <module name="oauth-resource" />
+        <module name="cloud-gateway" />
+        <module name="dipo-9001" />
       </profile>
     </annotationProcessing>
   </component>

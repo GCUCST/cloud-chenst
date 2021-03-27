@@ -1,5 +1,7 @@
 server:
   port: 9001
+#  error:
+#    path: /
 
 spring:
   application:
@@ -17,6 +19,7 @@ spring:
       ddl-auto: create
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL5Dialect
+
 
 eureka:
   instance:

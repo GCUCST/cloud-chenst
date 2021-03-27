@@ -66,7 +66,10 @@
                     window.location.replace("http://localhost:9001/index");
                 }, error: (e) => {
                     console.log(e)
-                    alert("登录失败！"+e.responseJSON.msg);
+                    layer.open({
+                        title: '登陆失败'
+                        ,content: e.responseJSON.msg
+                    });
                 },
             });
 

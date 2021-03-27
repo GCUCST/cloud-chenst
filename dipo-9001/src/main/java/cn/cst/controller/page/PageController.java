@@ -46,6 +46,11 @@ public class PageController extends AbstractController {
         return USER_INFO_PAGE;
     }
 
+    @GetMapping("/article")
+    public String article(Model model,HttpSession session) {
+        return ARTICLE_PAGE;
+    }
+
 
 
 

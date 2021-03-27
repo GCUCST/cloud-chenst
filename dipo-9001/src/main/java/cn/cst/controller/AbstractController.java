@@ -8,4 +8,8 @@ public abstract class AbstractController {
     public static final String REGISTER_PAGE = "/page/register";
     public static final String USER_INFO_PAGE = "/page/user/info";
 
+    public static final String ARTICLE_PAGE = "/page/article/index";
+
+
+
 }
