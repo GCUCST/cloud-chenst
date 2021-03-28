@@ -81,7 +81,10 @@
                             title: '注册成功'
                             ,content: "跳转回首页"
                         });
-                        window.location.replace("/login");
+                        setTimeout(()=>{
+                            window.location.replace("/login");
+                        },2000)
+
                     }, error: (e) => {
                         console.log(e)
                         layer.open({
