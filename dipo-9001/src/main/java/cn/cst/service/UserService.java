@@ -28,11 +28,11 @@ public class UserService {
     public User loginUser(User user) {
         User u = userRepository.findByUsername(user.getUsername());
         if(u==null){
-            throw new UserNotFoundException( "404","ÕÒ²»µ½¸ÃÓÃ»§");
+            throw new UserNotFoundException( "404","æ‰¾ä¸åˆ°è¯¥ç”¨æˆ·");
         }
         System.out.println(u.toString());
         if (!checkPassword(user.getPassword(), u.getPassword())) {
-            throw new LoginException("ÃÜÂë´íÎó", "400");
+            throw new LoginException("å¯†ç é”™è¯¯", "400");
         } else return u;
     }
 
@@ -63,7 +63,7 @@ public class UserService {
     public User save(User user) {
         User database_user = userRepository.findByUsername(user.getUsername());
         if (database_user != null) {
-            throw new UserExistException( "400","ÓÃ»§ÒÑ´æÔÚ");
+            throw new UserExistException( "400","ç”¨æˆ·å·²å­˜åœ¨");
         }
         user.setPassword(encoderByMd5(user.getPassword()));
         UserInfo ok = UserInfo.builder().status("OK").build();
@@ -80,7 +80,7 @@ public class UserService {
 
         User userFromDB = userRepository.findByUsername(username);
         if(userFromDB==null){
-            throw new UserNotFoundException("ÕÒ²»µ½Ä¿±êÓÃ»§¡£"+username,"404");
+            throw new UserNotFoundException("æ‰¾ä¸åˆ°ç›®æ ‡ç”¨æˆ·ã€‚"+username,"404");
         }
         UserInfo userInfo = userFromDB.getUserInfo();
         userInfo.setWechat(wechat);

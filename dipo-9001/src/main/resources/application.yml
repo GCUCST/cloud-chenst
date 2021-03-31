@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 80
 #  error:
 #    path: /
 
@@ -7,6 +7,7 @@ spring:
   application:
     name: dipo
   thymeleaf:
+    cache: false
     prefix: classpath:/templates/
   datasource:
     url: jdbc:mysql://106.55.23.102:3306/chenst?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
@@ -16,18 +17,17 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL5Dialect
 
-
-eureka:
-  instance:
-    instance-id: dipo-id
-    prefer-ip-address: true
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
-      defaultZone: http://localhost:7001/eureka
+#eureka:
+#  instance:
+#    instance-id: dipo-id
+#    prefer-ip-address: true
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+#    service-url:
+#      defaultZone: http://localhost:7001/eureka
 

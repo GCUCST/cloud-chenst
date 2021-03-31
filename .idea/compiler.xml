@@ -17,5 +17,12 @@
         <module name="dipo-9001" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="11" />
+  </component>
+  <component name="JavacSettings">
+    <option name="GENERATE_NO_WARNINGS" value="true" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="dipo-9001" options="" />
+    </option>
   </component>
 </project>

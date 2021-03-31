@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
-    <link th:href="@{/css/layui.css}" rel="stylesheet"/>
+    <link th:href="@{css/layui.css}" rel="stylesheet"/>
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
 
 </head>
 <body>
-<div th:include="/component/header :: header"></div>
+<div th:include="component/header :: header"></div>
 
 <div class="layui-container" style="width: 50%;margin-top: 100px">
     <div class="layui-row">
@@ -55,7 +55,7 @@
             $.ajax({
                 type: 'POST',
                 dataType:'json',
-                url: "http://localhost:9001/api/login",
+                url: "/api/login",
                 headers: { "Content-Type": "application/json" },
                 data: JSON.stringify({
                     username: data.field.username,
@@ -63,7 +63,7 @@
                 }),
                 success: (res) => {
                     console.log(res)
-                    window.location.replace("http://localhost:9001/index");
+                    window.location.replace("/index");
                 }, error: (e) => {
                     console.log(e)
                     layer.open({
@@ -80,5 +80,5 @@
 
 
 </body>
-<script th:src="@{/javascript/firework.js}"></script>
+<script th:src="@{javascript/firework.js}"></script>
 </html>

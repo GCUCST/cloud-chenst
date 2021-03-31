@@ -29,7 +29,7 @@
                     <span th:text="${session.get('username')}"></span>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="http://localhost:9001/user/info">基本资料</a></dd>
+                    <dd><a href="/user/info">基本资料</a></dd>
                     <dd><a href="">安全设置</a></dd>
                     <dd><a href="javaScript:void(0);" onclick="logout()" >退出登录</a></dd>
                 </dl>
@@ -51,14 +51,14 @@
         $.ajax({
             type: 'POST',
             // dataType:'json',
-            url: "http://localhost:9001/api/logout",
+            url: "/api/logout",
             // headers: { "Content-Type": "application/json" },
             success: (res) => {
                 console.log(res)
                 if(res){
-                    window.location.replace("http://localhost:9001/index");
+                    window.location.replace("/index");
                 }
-           //     window.location.replace("http://localhost:9001/index");
+           //     window.location.replace("/index");
             }, error: (e) => {
                 console.log(e)
             },

@@ -16,11 +16,11 @@ public class MyErrorController implements ErrorController {
         if(statusCode == 401){
             return "404";
         }else if(statusCode == 404){
-            return "/404";
+            return "404";
         }else if(statusCode == 403){
-            return "/403";
+            return "403";
         }else{
-            return "/500";
+            return "500";
         }
 
     }
