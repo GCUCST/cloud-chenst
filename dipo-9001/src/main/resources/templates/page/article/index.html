@@ -15,128 +15,13 @@
 </div>
 
 
-<div style="width: 90%;padding: 0 5%;height: 100%;margin-top: 80px">
+<div style="width: 80%;padding: 0 5%;height: 100%;margin-top: 80px">
     <div class="layui-row layui-col-space10">
-        <div class="layui-col-md9 ">
-            <fieldset class="layui-elem-field">
-                <legend>基础知识</legend>
-                <div class="layui-field-box" style="text-indent: 2em">
-                  <span class="layui-breadcrumb" lay-separator="|">
-                      <a href="">Git的使用</a>
-                      <a href="">Maven的使用</a>
-                      <a href="">Docker的使用</a>
-                      <a href="">Linux基础命令</a>
-                  </span>
-                </div>
-            </fieldset>
-            <fieldset class="layui-elem-field">
-                <legend>基础前端开发</legend>
-                <div class="layui-field-box" style="text-indent: 2em">
-                  <span class="layui-breadcrumb" lay-separator="|">
-                      <a href="">html</a>
-                      <a href="">javascript</a>
-                      <a href="">Typescript</a>
-                      <a href="">css</a>
-                      <a href="">vue.js</a>
-                      <a href="">webpack</a>
-                      <a href="">jquery</a>
-                      <a href="">tailwindcss</a>
-                      <a href="">react</a>
-                      <a href="">uni</a>
-                      <a href="">微信小程序</a>
-                      <a href="">node.js</a>
-                  </span>
-                </div>
-            </fieldset>
-            <fieldset class="layui-elem-field">
-                <legend>Java后端开发</legend>
-                <div class="layui-field-box" style="text-indent: 2em">
-                  <span class="layui-breadcrumb" lay-separator="|">
-                      <a href="">Java</a>
-                      <a href="">Mysql</a>
-                      <a href="">Springboot</a>
-                      <a href="">SpringCloud</a>
-                      <a href="">Redis</a>
-                      <a href="">Pulsar</a>
-                      <a href="">Flink</a>
-                      <a href="">Dobbo</a>
-                      <a href="">RabbitMQ</a>
-
-                  </span>
-                </div>
-            </fieldset>
-
-            <fieldset class="layui-elem-field">
-                <legend>技术整合篇</legend>
-                <div class="layui-field-box" style="text-indent: 2em">
-                  <span class="layui-breadcrumb" lay-separator="|">
-                      <a href="">SSM框架整合</a>
-                      <a href="">SSH框架整合</a>
-                      <a href="">软件测试</a>
-                      <a href="">Nginx</a>
-                  </span>
-                </div>
-            </fieldset>
-
-            <fieldset class="layui-elem-field">
-                <legend>概念基础</legend>
-                <div class="layui-field-box" style="text-indent: 2em">
-                  <span class="layui-breadcrumb" lay-separator="|">
-                      <a href="">线程安全与锁</a>
-                      <a href="">java内存模型</a>
-                      <a href="">消息队列</a>
-                      <a href="">JUC</a>
-                      <a href="">jvm</a>
-                      <a href="">线程与进程</a>
-                      <a href="">操作系统</a>
-                      <a href="">数据结构与算法</a>
-                      <a href="">分布式与微服务</a>
-                      <a href="">计算机网络</a>
-                  </span>
-                </div>
-            </fieldset>
-
-
-
-
-        </div>
-        <div class="layui-col-md3 ">
-            <fieldset class="layui-elem-field">
-                <legend style="font-weight: bold">杂乱无章</legend>
-                <div class="layui-field-box" style="text-indent: 2em">
-                    <div><a href="http://baidu.com">我的一篇文章的标题</a></div>
-                </div>
-                <div class="layui-field-box" style="text-indent: 2em">
-                    <div><a href="http://baidu.com">我的一篇文章的标题</a></div>
-                </div>
-                <div class="layui-field-box" style="text-indent: 2em">
-                    <div><a href="http://baidu.com">我的一篇文章的标题</a></div>
-                </div>
-                <div class="layui-field-box" style="text-indent: 2em">
-                    <div><a href="http://baidu.com">我的一篇文章的标题</a></div>
-                </div>
-                <div class="layui-field-box" style="text-indent: 2em">
-                    <div><a href="http://baidu.com">我的一篇文章的标题</a></div>
-                </div>
-            </fieldset>
-            <fieldset class="layui-elem-field">
-                <legend style="font-weight: bold">我的推荐</legend>
-                <div class="layui-field-box" style="text-indent: 2em">
-                    <div><a href="http://baidu.com">我的一篇文章的标题</a></div>
-                </div>
-                <div class="layui-field-box" style="text-indent: 2em">
-                    <div><a href="http://baidu.com">我的一篇文章的标题</a></div>
-                </div>
-                <div class="layui-field-box" style="text-indent: 2em">
-                    <div><a href="http://baidu.com">我的一篇文章的标题</a></div>
-                </div>
-                <div class="layui-field-box" style="text-indent: 2em">
-                    <div><a href="http://baidu.com">我的一篇文章的标题</a></div>
-                </div>
-                <div class="layui-field-box" style="text-indent: 2em">
-                    <div><a href="http://baidu.com">我的一篇文章的标题</a></div>
-                </div>
-            </fieldset>
+        <div class="layui-form-item">
+            <label class="layui-form-label">标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
         </div>
 
     </div>

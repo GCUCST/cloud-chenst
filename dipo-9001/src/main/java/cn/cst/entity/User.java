@@ -9,7 +9,7 @@ import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-
+import java.io.Serializable;
 
 
 // 不要使用   @Data   因为其中的toString导致StackOverflow!!!!!!!!!!!!
@@ -23,7 +23,7 @@ import javax.validation.constraints.NotEmpty;
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 @Table(name = "table_user")
 @Proxy(lazy = false)
-public class User{
+public class User implements Serializable {
 
     private String id;
 

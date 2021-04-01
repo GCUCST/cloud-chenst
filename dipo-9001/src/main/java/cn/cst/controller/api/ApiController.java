@@ -1,10 +1,12 @@
 package cn.cst.controller.api;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@Cacheable
 public class ApiController {
 
 
@@ -18,5 +20,14 @@ public class ApiController {
 //    public String rest() {
 //        return "index";
 //    }
+
+
+
+    @GetMapping("testRedis")
+    @Cacheable("ChenST")
+    public String rest() {
+        System.out.println("testRedis is called...");
+        return "index";
+    }
 
 }
