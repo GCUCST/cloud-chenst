@@ -3,11 +3,14 @@ package cn.cst.controller.api;
 import cn.cst.dao.UserRepository;
 import cn.cst.entity.User;
 import cn.cst.entity.UserInfo;
+import cn.cst.exception.CustomException;
 import cn.cst.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -40,6 +43,17 @@ public class UserController {
     public  ResponseEntity deleteUser(@PathVariable("id") String id) {
         userService.deleteById(id);
         return  ResponseEntity.ok().body(1);
+    }
+
+
+    @GetMapping(path = "info")
+    public  ResponseEntity getUserInfo(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        if(user==null){
+            throw new CustomException(401,"请先登录...");
+        }
+        return  ResponseEntity.ok().body(user);
     }
 
 }

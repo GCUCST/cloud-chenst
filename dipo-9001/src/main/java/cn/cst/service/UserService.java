@@ -33,7 +33,10 @@ public class UserService {
         System.out.println(u.toString());
         if (!checkPassword(user.getPassword(), u.getPassword())) {
             throw new LoginException("密码错误", "400");
-        } else return u;
+        } else{
+            u.setPassword("");
+            return u;
+        }
     }
 
 

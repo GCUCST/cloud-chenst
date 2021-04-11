@@ -1,6 +1,8 @@
 package cn.cst.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -33,7 +35,7 @@ public class User implements Serializable {
 
     private String password;
 
-    UserInfo userInfo;
+    private UserInfo userInfo;
 
     @Id
     @GeneratedValue(generator = "jpa-uuid")
@@ -68,7 +70,8 @@ public class User implements Serializable {
     @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     //维护关系的一方生成一个自定义的键（外键），值对应被维护关系的一方的主键，双向一对一需要指明unique=true
     @JoinColumn(name = "fk_user_info_id",unique=true)
-    @JsonIgnore  //响应的时候解析为json会报错.
+//    @JsonIgnore  //响应的时候解析为json会报错.
+    @JsonIgnoreProperties({"user"}) //序列化的时候 忽略该属性，避免json死循环
     public UserInfo getUserInfo() {
         return userInfo;
     }

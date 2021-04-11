@@ -8,6 +8,6 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
  * session托管到redis
  */
 @Configuration
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds= 3600*24, redisFlushMode = RedisFlushMode.ON_SAVE, redisNamespace = "aurora-web")
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds= 600,redisNamespace = "myNamespace")
 public class SessionConfig {
 }

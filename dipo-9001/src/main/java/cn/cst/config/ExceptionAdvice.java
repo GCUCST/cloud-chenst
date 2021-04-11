@@ -1,5 +1,6 @@
 package cn.cst.config;
 
+import cn.cst.exception.CustomException;
 import cn.cst.exception.LoginException;
 import cn.cst.exception.UserExistException;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
@@ -22,6 +23,9 @@ public class ExceptionAdvice {
         //判断异常的类型,返回不一样的返回值
         if(ex instanceof MissingServletRequestParameterException){
             map.put("msg","缺少必需参数："+((MissingServletRequestParameterException) ex).getParameterName());
+        }
+        if(ex instanceof CustomException){
+            map.put("自定义异常","错误");
         }
         else if(ex instanceof LoginException){
             map.put("msg","登录密码错误");

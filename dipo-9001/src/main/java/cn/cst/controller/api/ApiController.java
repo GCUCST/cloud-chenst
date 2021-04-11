@@ -1,20 +1,22 @@
 package cn.cst.controller.api;
 
+import cn.cst.exception.LoginException;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@Cacheable
+@Cacheable(cacheNames = {"testData1"})
 public class ApiController {
 
 
-//    @PostMapping("/api/login")
-//    public String add(@ModelAttribute User user, HttpSession session) {
-//        session.setAttribute("username", user.getName());
-//        return "index";
-//    }
+    @GetMapping("/test/data")
+    public String testGet( ) {
+       if(true) throw new  LoginException("异常？？、","404");
+        return "data...";
+    }
 //
 //    @GetMapping("error")
 //    public String rest() {
