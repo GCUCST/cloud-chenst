@@ -1,28 +1,55 @@
 package cn.cst.controller.api;
 
+import cn.cst.entity.Room;
+import cn.cst.entity.User;
 import cn.cst.exception.CustomException;
-import cn.cst.service.WebSocketServer;
-import org.springframework.boot.actuate.trace.http.HttpTrace;
+import cn.cst.utils.RoomsManagement;
+import cn.cst.utils.SessionUtil;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
+import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
+@RequestMapping("api/room")
 public class WebSocketController {
-    @RequestMapping("/checkRoom/{roomId}")
-    public ResponseEntity<String> check(HttpSession session, @PathVariable("roomId") String roomId) throws IOException {
-
+    @RequestMapping("/check/{roomId}")
+    public ResponseEntity<String> checkRoom(HttpSession session, @PathVariable("roomId") String roomId) {
         //模拟
-        if(false)throw new CustomException(400,"房间不存在");
-        if(false)throw new CustomException(400,"房间已满");
-        if(null==session.getAttribute("user"))
-            throw new CustomException(400,"该操作需要登录");
+        Room targetRoom = RoomsManagement.getRoomById(roomId);
+        if (targetRoom==null) throw new CustomException(400, "房间不存在");
+//        if (false) throw new CustomException(400, "房间已满");
+        if (null == SessionUtil.getUser(session))
+            throw new CustomException(400, "该操作需要登录");
+        return ResponseEntity.ok("正在进入房间"+roomId);
+    }
 
-        return ResponseEntity.ok("正在进入房间");
+    @GetMapping
+    public ResponseEntity<List> listRooms() {
+        List<Room> rooms = RoomsManagement.listRooms();
+        return ResponseEntity.ok(rooms);
+    }
+
+    @PostMapping
+    public ResponseEntity<Room> createRoom(HttpSession session, @RequestBody @Valid Room room) {
+        //模拟
+        final String id = UUID.randomUUID().toString().replace("-","").substring(0,8);
+        User user = SessionUtil.getUser(session);
+        room.setId(id);
+        room.setRoomIdNum(id);
+        room.setCreatedTime(LocalDateTime.now());
+        room.setUserId(user.getId());
+        room.setUsername(user.getUsername());
+        room.setRoomSpace(500);
+        room.setOnLinePlayerNum(0);
+        room.setRoomCoverUrl("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201505%2F04%2F20150504003238_NykiS.thumb.700_0.jpeg&refer=http%3A%2F%2Fimg3.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620728378&t=9667cd7cf1e9989a8ab8bfce29a8ea50");
+        room.setStatus("正常");
+        Room resultRoom = RoomsManagement.createRoom(room);
+        return ResponseEntity.ok(resultRoom);
     }
 
 //    @RequestMapping("/push/{roomId}")
