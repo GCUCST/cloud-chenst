@@ -5,6 +5,7 @@ import cn.cst.entity.User;
 import cn.cst.exception.CustomException;
 import cn.cst.utils.RoomsManagement;
 import cn.cst.utils.SessionUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/room")
+@Slf4j
 public class WebSocketController {
     @RequestMapping("/check/{roomId}")
     public ResponseEntity<String> checkRoom(HttpSession session, @PathVariable("roomId") String roomId) {
@@ -29,6 +31,12 @@ public class WebSocketController {
     }
 
     @GetMapping
+    public ResponseEntity<Room> getRoomById(String roomId) {
+        Room room = RoomsManagement.getRoomById(roomId);
+        log.info("获取房间：{}",room);
+        return ResponseEntity.ok(room);
+    }
+    @GetMapping("/list")
     public ResponseEntity<List> listRooms() {
         List<Room> rooms = RoomsManagement.listRooms();
         return ResponseEntity.ok(rooms);

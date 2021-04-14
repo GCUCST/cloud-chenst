@@ -1,6 +1,7 @@
 package cn.cst.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Builder
@@ -16,7 +19,7 @@ import java.time.LocalDateTime;
 public class Room {
 
     private String id;
-    private String roomIdNum;
+    private String roomIdNum;  //创建者
     private String roomCoverUrl;
     @NotEmpty(message = "房间名称不能为空")
     private String roomName;
@@ -29,5 +32,7 @@ public class Room {
     private String username;
     @NotEmpty(message = "房间描述不能为空")
     private String roomDescription;
+
+    private Set<SocketUser> users = new HashSet();
 
 }

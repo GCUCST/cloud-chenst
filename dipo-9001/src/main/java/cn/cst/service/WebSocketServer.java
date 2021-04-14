@@ -1,8 +1,14 @@
 package cn.cst.service;
 
+import cn.cst.config.ServerEncoder;
+import cn.cst.entity.MessageTemplate;
+import cn.cst.entity.Room;
 import cn.cst.entity.SocketUser;
 import cn.cst.entity.User;
 import cn.cst.exception.CustomException;
+import cn.cst.utils.JsonUtil;
+import cn.cst.utils.MessageUtil;
+import cn.cst.utils.RoomsManagement;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 import com.alibaba.fastjson.JSON;
@@ -17,11 +23,11 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.Enumeration;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-@ServerEndpoint("/chatServer/{socketUserJson}")
+@ServerEndpoint(value="/chatServer/{socketUserJson}", encoders = { ServerEncoder.class })
 @Component
 public class WebSocketServer {
 
@@ -42,25 +48,33 @@ public class WebSocketServer {
      * 接收userId
      */
     private String userId = "";
+    private String roomId = "";
 
     private SocketUser socketUser;
 
     private String key = "";
+
+    private void buildProcess(SocketUser socketUser,Session session)
+    {
+        this.session = session;
+        this.userId = socketUser.getUserId();
+        this.roomId = socketUser.getRoomId();
+        this.socketUser = socketUser;
+        this.key = socketUser.getRoomId() + "/" + socketUser.getUserId();
+    }
 
     /**
      * 连接建立成功调用的方法
      */
     @OnOpen
     public void onOpen(Session session, @PathParam("socketUserJson") String socketUserJson) {
-        System.out.println("{" + socketUserJson + "}");
-        JSONObject jsonObject = JSONObject.parseObject("{" + socketUserJson + "}");
-        String userId = jsonObject.getString("userId");
-        String roomId = jsonObject.getString("roomId");
-        this.session = session;
-        key = roomId + "/" + userId;
+        String targetStr = "{" + socketUserJson + "}";
+        SocketUser socketUser = JsonUtil.getSocketUser(targetStr);
+        this.buildProcess(socketUser,session);
 
-        this.userId = userId;
-        socketUser = SocketUser.builder().userId(userId).roomId(roomId).build();
+        // 判断当前room存在否
+        Boolean exist = RoomsManagement.existRoomById(this.roomId);
+        if(!exist)throw new CustomException(404,"当前房间未找到");
 
 
         if (webSocketMap.containsKey(key)) {
@@ -70,16 +84,42 @@ public class WebSocketServer {
         } else {
             webSocketMap.put(key, this);
             //加入set中
-            addOnlineCount();
+            addOnlineCount(roomId);
             //在线数加1
         }
 
-        log.info("用户连接:" + this.key + ",当前在线人数为:" + getOnlineCount());
+        log.info("用户连接:" + this.key + ",当前在线总人数为:" + getOnlineCount());
         try {
-            sendMessage("连接成功");
-        } catch (IOException e) {
+            sendMessage(MessageUtil.systemMessage(this.userId+"建立连接成功"));
+            for (MessageTemplate msg: getHistoryMsgs(roomId)){
+                sendMessage(msg);
+            }
+            sendMsgInRoom(this.userId+"来了");
+        } catch (IOException | EncodeException e) {
             log.error("用户:" + this.key + ",网络异常!!!!!!");
         }
+    }
+
+    public static Map<String,ArrayList<MessageTemplate>> historyMsgs = new HashMap<>();
+    private synchronized void saveToHistory(String roomId,MessageTemplate template){
+        if(historyMsgs!=null&&historyMsgs.containsKey(roomId)){
+            ArrayList<MessageTemplate> messageTemplates = historyMsgs.get(roomId);
+            if(messageTemplates.size()>20){
+                messageTemplates.remove(0);
+            }
+            messageTemplates.add(template);
+        }
+        else {
+            historyMsgs = new HashMap<>();
+            ArrayList<MessageTemplate> messageTemplates = new ArrayList<>();
+            historyMsgs.put(roomId,messageTemplates);
+        }
+    }
+
+    private List<MessageTemplate> getHistoryMsgs(String roomId){
+        if(historyMsgs==null)return new ArrayList<>();
+        if(historyMsgs.get(roomId)==null)return new ArrayList<>();
+        return historyMsgs.get(roomId);
     }
 
     /**
@@ -90,7 +130,7 @@ public class WebSocketServer {
         if (webSocketMap.containsKey(key)) {
             webSocketMap.remove(key);
             //从set中删除
-            subOnlineCount();
+            subOnlineCount(roomId);
         }
         log.info("用户退出:" + key + ",当前在线人数为:" + getOnlineCount());
     }
@@ -102,35 +142,34 @@ public class WebSocketServer {
      */
     @OnMessage
     public void onMessage(String message, Session session) {
+        sendMsgInRoom(message);
+    }
+
+    private void sendMsgInRoom(String message){
         log.info("用户消息:" + key + ",报文:" + message);
         //可以群发消息
         //消息保存到数据库、redis
-
         Enumeration<String> keys = webSocketMap.keys();
-
         if (StringUtils.isNotBlank(message)) {
             try {
-                //解析发送的报文
-                JSONObject jsonObject = JSON.parseObject(message);
-                //追加发送人(防止串改)
-                jsonObject.put("fromUserId", this.userId);
-                //传送给对应toUserId用户的websocket
                 keys.asIterator().forEachRemaining(con -> {
                     if (con.startsWith(this.socketUser.getRoomId())) {
                         try {
-                            webSocketMap.get(con).sendMessage(jsonObject.toJSONString());
+                            try {
+                                webSocketMap.get(con).sendMessage(MessageUtil.buildMessage(message,socketUser));
+                                saveToHistory(this.socketUser.getRoomId(),MessageUtil.buildMessage(message,socketUser));
+                            } catch (EncodeException e) {
+                                e.printStackTrace();
+                            }
                         } catch (IOException e) {
                             log.error("请求的roomId/userId:" + "不在该服务器上");
                         }
                     }
-
                 });
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
-
     }
 
     /**
@@ -146,8 +185,9 @@ public class WebSocketServer {
     /**
      * 实现服务器主动推送
      */
-    public void sendMessage(String message) throws IOException {
-        this.session.getBasicRemote().sendText(message);
+    public void sendMessage(MessageTemplate message) throws IOException, EncodeException {
+//        this.session.getBasicRemote().sendObject(message);
+        this.session.getBasicRemote().sendText(JsonUtil.getMsgJsonStr(message));
     }
 
 
@@ -167,15 +207,25 @@ public class WebSocketServer {
 
     }
 
-    public static synchronized int getOnlineCount() {
+    public  synchronized int getOnlineCount() {
         return onlineCount;
     }
 
-    public static synchronized void addOnlineCount() {
+    public  synchronized void addOnlineCount(String roomId) {
         WebSocketServer.onlineCount++;
+        Boolean existRoom = RoomsManagement.existRoomById(roomId);
+        if(!existRoom)return;
+        Room room = RoomsManagement.getRoomById(roomId);
+        room.getUsers().add(socketUser);
+        room.setOnLinePlayerNum(room.getOnLinePlayerNum()+1);
     }
 
-    public static synchronized void subOnlineCount() {
+    public  synchronized void subOnlineCount(String roomId) {
         WebSocketServer.onlineCount--;
+        Boolean existRoom = RoomsManagement.existRoomById(roomId);
+        if(!existRoom)return;
+        Room room = RoomsManagement.getRoomById(roomId);
+        room.getUsers().remove(socketUser);
+        room.setOnLinePlayerNum(room.getOnLinePlayerNum()-1);
     }
 }

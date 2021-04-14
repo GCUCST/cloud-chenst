@@ -27,6 +27,11 @@ public class RoomsManagement {
         return roomMap.get(roomId);
     }
 
+    //房间存在否
+    public static Boolean existRoomById(String  roomId){
+        return roomMap.containsKey(roomId);
+    }
+
     //所有房间
     public static List<Room> listRooms(){
         List<Room> list = new ArrayList<>();
