@@ -4,21 +4,21 @@ import cn.cst.config.ServerEncoder;
 import cn.cst.entity.MessageTemplate;
 import cn.cst.entity.Room;
 import cn.cst.entity.SocketUser;
-import cn.cst.entity.User;
 import cn.cst.exception.CustomException;
 import cn.cst.utils.JsonUtil;
 import cn.cst.utils.MessageUtil;
+import cn.cst.utils.RedisUtil;
 import cn.cst.utils.RoomsManagement;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import lombok.Data;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
+import javax.annotation.Resource;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
@@ -30,6 +30,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @ServerEndpoint(value="/chatServer/{socketUserJson}", encoders = { ServerEncoder.class })
 @Component
 public class WebSocketServer {
+
+
+   public static RedisUtil redisUtil;
 
     static Log log = LogFactory.get(WebSocketServer.class);
     /**
@@ -108,6 +111,7 @@ public class WebSocketServer {
                 messageTemplates.remove(0);
             }
             messageTemplates.add(template);
+            redisUtil.set("kahsdkjh",template);
         }
         else {
             historyMsgs = new HashMap<>();

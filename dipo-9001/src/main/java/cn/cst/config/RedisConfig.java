@@ -23,41 +23,51 @@ import java.time.Duration;
 @Configuration
 public class RedisConfig {
 
-    //×Ô¶¨ÒåRedisTemplate
+    //è‡ªå®šä¹‰RedisTemplate
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory lettuceConnectionFactory) {
-        // ÉèÖÃĞòÁĞ»¯
-        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(
-                Object.class);
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
+        // é…ç½®è¿æ¥å·¥å‚
+        template.setConnectionFactory(factory);
+
+        //ä½¿ç”¨Jackson2JsonRedisSerializeræ¥åºåˆ—åŒ–å’Œååºåˆ—åŒ–redisçš„valueå€¼ï¼ˆé»˜è®¤ä½¿ç”¨JDKçš„åºåˆ—åŒ–æ–¹å¼ï¼‰
+        Jackson2JsonRedisSerializer jacksonSeial = new Jackson2JsonRedisSerializer(Object.class);
+
         ObjectMapper om = new ObjectMapper();
+        // æŒ‡å®šè¦åºåˆ—åŒ–çš„åŸŸï¼Œfield,getå’Œset,ä»¥åŠä¿®é¥°ç¬¦èŒƒå›´ï¼ŒANYæ˜¯éƒ½æœ‰åŒ…æ‹¬privateå’Œpublic
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        // æŒ‡å®šåºåˆ—åŒ–è¾“å…¥çš„ç±»å‹ï¼Œç±»å¿…é¡»æ˜¯éfinalä¿®é¥°çš„ï¼Œfinalä¿®é¥°çš„ç±»ï¼Œæ¯”å¦‚String,Integerç­‰ä¼šè·‘å‡ºå¼‚å¸¸
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-        jackson2JsonRedisSerializer.setObjectMapper(om);
-        // ÅäÖÃredisTemplate
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
-        redisTemplate.setConnectionFactory(lettuceConnectionFactory);
-        RedisSerializer<?> stringSerializer = new StringRedisSerializer();
-        redisTemplate.setKeySerializer(stringSerializer);// keyĞòÁĞ»¯
-        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);// valueĞòÁĞ»¯
-        redisTemplate.setHashKeySerializer(stringSerializer);// Hash keyĞòÁĞ»¯
-        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);// Hash valueĞòÁĞ»¯
-        redisTemplate.afterPropertiesSet();
-        return redisTemplate;
+        jacksonSeial.setObjectMapper(om);
+
+        // å€¼é‡‡ç”¨jsonåºåˆ—åŒ–
+        template.setValueSerializer(jacksonSeial);
+        //ä½¿ç”¨StringRedisSerializeræ¥åºåˆ—åŒ–å’Œååºåˆ—åŒ–redisçš„keyå€¼
+        template.setKeySerializer(new StringRedisSerializer());
+
+        // è®¾ç½®hash key å’Œvalueåºåˆ—åŒ–æ¨¡å¼
+        template.setHashKeySerializer(new StringRedisSerializer());
+        template.setHashValueSerializer(jacksonSeial);
+        template.afterPropertiesSet();
+
+        return template;
     }
 
-    //×Ô¶¨ÒåcacheManager»º´æ¹ÜÀíÆ÷
+
+    //è‡ªå®šä¹‰cacheManagerç¼“å­˜ç®¡ç†å™¨
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory factory)
     {
         RedisSerializer<String> redisSerializer = new StringRedisSerializer();
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
 
-        //½â¾ö²éÑ¯»º´æ×ª»»Òì³£µÄÎÊÌâ
+        //è§£å†³æŸ¥è¯¢ç¼“å­˜è½¬æ¢å¼‚å¸¸çš„é—®é¢˜
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(om);
-        //ÅäÖÃĞòÁĞ»¯(½â¾öÂÒÂëµÄÎÊÌâ)
+        //é…ç½®åºåˆ—åŒ–(è§£å†³ä¹±ç çš„é—®é¢˜)
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ZERO)
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))

@@ -14,12 +14,12 @@ import javax.servlet.http.HttpSession;
 public class JsonUtil<T> {
 
 
-    public SocketUser getSocketUser(String jsonStr){
+    public SocketUser getSocketUser(String jsonStr) {
         SocketUser socketUser = JSONObject.parseObject(jsonStr, SocketUser.class);
         return socketUser;
     }
 
-    public String getMsgJsonStr(MessageTemplate messageTemplate){
+    public String getMsgJsonStr(MessageTemplate messageTemplate) {
         String targetStr = JSONObject.toJSONString(messageTemplate);
         return targetStr;
     }

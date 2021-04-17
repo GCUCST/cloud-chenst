@@ -30,6 +30,10 @@ public class LoginController {
         log.info(user.getUsername());
         User loginUser = userService.loginUser(user);
         session.setAttribute("user",loginUser);
+        Cookie cookie = new Cookie("username",loginUser.getUsername());
+        cookie.setPath("/");
+        cookie.setHttpOnly(false);
+        response.addCookie(cookie);
         return ResponseEntity.ok(loginUser);
 
     }

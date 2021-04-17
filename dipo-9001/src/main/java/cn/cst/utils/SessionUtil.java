@@ -10,11 +10,10 @@ import javax.servlet.http.HttpSession;
 @UtilityClass
 public class SessionUtil {
 
-    public User getUser(HttpSession session)
-    {
-        User user = (User)session.getAttribute("user");
-        if(user==null){
-            throw new CustomException(401,"请先登录...");
+    public User getUser(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            throw new CustomException(401, "请先登录...");
         }
         return user;
     }
