@@ -15,6 +15,7 @@
         <module>dipo-9001</module>
         <module>oauth-resource</module>
         <module>cloud-gateway</module>
+        <module>story</module>
     </modules>
     <packaging>pom</packaging>
 
