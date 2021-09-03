@@ -5,7 +5,8 @@ server:
 
 spring:
   redis:
-    host: 106.55.23.102
+    database: 1
+    host: localhost
     port: 6379
     password:
   application:
@@ -14,10 +15,10 @@ spring:
     cache: false
     prefix: classpath:/templates/
   datasource:
-    url: jdbc:mysql://106.55.23.102:3306/chenst?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+    url: jdbc:mysql://localhost:3306/chenst?characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
-    password: Qq1131460769@
+    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:

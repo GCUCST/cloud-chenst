@@ -19,7 +19,7 @@ import java.net.http.HttpResponse;
 import java.util.Enumeration;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("/api")
 @Slf4j
 public class LoginController {
 
@@ -30,6 +30,7 @@ public class LoginController {
         log.info(user.getUsername());
         User loginUser = userService.loginUser(user);
         session.setAttribute("user",loginUser);
+        session.setAttribute("username",loginUser.getUsername());
         Cookie cookie = new Cookie("username",loginUser.getUsername());
         cookie.setPath("/");
         cookie.setHttpOnly(false);
@@ -39,10 +40,12 @@ public class LoginController {
     }
     @PostMapping("/logout")
     public ResponseEntity<Boolean> logout(HttpSession session){
-        Enumeration em = session.getAttributeNames();
-        while(em.hasMoreElements()){
-            session.removeAttribute(em.nextElement().toString());
-        }
+
+//        Enumeration em = session.getAttributeNames();
+//        while(em.hasMoreElements()){
+//            session.removeAttribute(em.nextElement().toString());
+//        }
+        session.invalidate();
         return ResponseEntity.ok(true);
     }
 

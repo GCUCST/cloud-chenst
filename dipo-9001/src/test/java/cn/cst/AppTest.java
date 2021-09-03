@@ -12,11 +12,29 @@
 //import org.springframework.test.context.junit4.SpringRunner;
 //
 //import java.util.List;
+//import java.util.regex.Pattern;
 //
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
+////@RunWith(SpringRunner.class)
+////@SpringBootTest
 //
 //public class AppTest {
+//
+//    @Test
+//   public void testA(){
+//        String pattern = "^image/.*";
+//
+//        System.out.println(Pattern.matches(pattern, "image/jpeg"));
+//        System.out.println(Pattern.matches(pattern, "image/png"));
+//        System.out.println(Pattern.matches(pattern, "text/html"));
+//        System.out.println(Pattern.matches(pattern, "^image/.*"));
+//        System.out.println(Pattern.matches(pattern, "abct"));
+//        System.out.println(Pattern.matches(pattern, "image"));
+//        System.out.println(Pattern.matches(pattern, "^image"));
+//
+//    }
+//
+//
+//
 //
 //    @Autowired
 //    private UserInfoRepository userInfoRepository;
